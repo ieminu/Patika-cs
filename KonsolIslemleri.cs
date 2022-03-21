@@ -1,10 +1,10 @@
-namespace Telefon_Rehberi_Uygulamasi
+namespace ToDo_Uygulamasi
 {
-    static class KonsolIslemleri
+    class KonsolIslemleri
     {
-        public static ulong ConvertInputToInt()
+        public static byte ConvertInputToInt()
         { 
-            ulong Sayi = 0;
+            byte Sayi = 0;
             string Girdi = "";
 
             TryInput:
@@ -22,7 +22,7 @@ namespace Telefon_Rehberi_Uygulamasi
 
             try
             {
-                Sayi = ulong.Parse(Girdi);
+                Sayi = byte.Parse(Girdi);
             }
             catch (FormatException)
             {
@@ -31,10 +31,16 @@ namespace Telefon_Rehberi_Uygulamasi
                 Girdi = Console.ReadLine();
                 goto TryConvert;
             }
+            catch (OverflowException)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Lütfen 1'den 255'e kadar olan bir sayı giriniz:\n");
+                Girdi = Console.ReadLine();
+                goto TryConvert;
+            }
             
             return Sayi;
         }
-
         
         public static string CheckInputNotNull()
         {

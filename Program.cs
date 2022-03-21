@@ -1,67 +1,71 @@
-﻿using System;
-
-namespace Telefon_Rehberi_Uygulamasi
+﻿namespace ToDo_Uygulamasi
 {
-     class MainClass
+    class MainClass
     {
-        public static List<Kisiler> KisiListesi = new List<Kisiler>();
-
-        public static void Menu()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Yapmak istediğiniz işlemi seçiniz :");
-            Console.WriteLine("---------------------------------------------\n");
-            Console.WriteLine("(1) Yeni Numara Kaydetme");
-            Console.WriteLine("(2) Varolan Numarayı Silme");
-            Console.WriteLine("(3) Varolan Numarayı Güncelleme");
-            Console.WriteLine("(4) Rehberi Listeleme");
-            Console.WriteLine("(5) Rehberde Arama Yapma");
-            Console.WriteLine();
-
-            SayiInput:
-            switch (KonsolIslemleri.ConvertInputToInt())
-            {
-                case 1 : _5Islem.YeniNumaraKaydetme();
-                break;
-
-                case 2 : _5Islem.VarolanNumarayiSilme();
-                break;
-
-                case 3 : _5Islem.VarolanNumarayiGuncelleme();
-                break;
-
-                case 4 : _5Islem.RehberiListeleme();
-                break;
-
-                case 5 : _5Islem.RehberdeAramaYapma();
-                break;
-
-                default :Console.WriteLine("Lütfen 1'den 5'e kadar olan bir sayı giriniz:\n"); goto SayiInput;
-            }
-        }
-
-        public static void IlkIslemler()
-        {
-            Kisiler Kisi1 = new Kisiler("Eren", "Çelik", "5330987610");
-            Kisiler Kisi2 = new Kisiler("Kemal", "Çiftçi", "5371989315");
-            Kisiler Kisi3 = new Kisiler("Orçun", "İşkol", "5367686645");
-            Kisiler Kisi4 = new Kisiler("Doruk", "Demir", "5382188359");
-            Kisiler Kisi5 = new Kisiler("Dilek", "Süleymanoğlu", "5380984031");
-
-            KisiListesi.Add(Kisi1);
-            KisiListesi.Add(Kisi2);
-            KisiListesi.Add(Kisi3);
-            KisiListesi.Add(Kisi4);
-            KisiListesi.Add(Kisi5);
-            
-            foreach (Kisiler kisi in MainClass.KisiListesi)
-                _5Islem.KisiIsimleri.Add(kisi.Isim);
-        }
-        
         static void Main(string[] args)
         {
             IlkIslemler();
             Menu();
+        }
+
+        public static void IlkIslemler()
+        {
+            _4Islem.Kisiler.Add(1, "Yemin");
+            _4Islem.Kisiler.Add(2, "Mahmut");
+            _4Islem.Kisiler.Add(3, "Doruk");
+            _4Islem.Kisiler.Add(4, "Edanur");
+            _4Islem.Kisiler.Add(5, "Nazlı");
+
+            Kart kart1 = new Kart("Kuryelik", "Ev Teslimi", "L", "Mahmut");
+            _4Islem.TODOLineKartlari.Add(kart1);
+
+            Kart kart2 = new Kart("Kuryelik", "Dağıtım Merkezine Teslim", "M", "Doruk");
+            _4Islem.TODOLineKartlari.Add(kart2);
+            
+            Kart kart3 = new Kart("Düzenleme", "Kargoları Düzenleme", "XS", "Edanur");
+            _4Islem.INPROGRESSLineKartlari.Add(kart3);
+
+            _4Islem.TumKartlar.Add(_4Islem.TODOLineKartlari);
+            _4Islem.TumKartlar.Add(_4Islem.INPROGRESSLineKartlari);
+            _4Islem.TumKartlar.Add(_4Islem.DONELineKartlari);
+        }
+
+        public static void Menu()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Yapmak istediğiniz işlemi seçiniz:");
+            Console.WriteLine("---------------------------------------------\n");
+            Console.WriteLine("(1) Board'ı Listelemek");
+            Console.WriteLine("(2) Board'a Kart Eklemek");
+            Console.WriteLine("(3) Board'dan Kart Silmek");
+            Console.WriteLine("(4) Kart Taşımak");
+            Console.WriteLine();
+
+            SayiInput:
+
+            switch (KonsolIslemleri.ConvertInputToInt())
+            {
+                case 1: 
+                    _4Islem.BoardiListeleme();
+                    break;
+                    
+                case 2: 
+                    _4Islem.BoardaKartEkleme();
+                    break;
+                    
+                case 3: 
+                    _4Islem.BoarddanKartSilme();
+                    break;
+                    
+                case 4: 
+                    _4Islem.KartTasima();
+                    break;
+
+                default:
+                    Console.WriteLine();
+                    Console.WriteLine("Lütfen 1'den 4'e kadar olan bir sayı giriniz:\n");
+                    goto SayiInput;
+            }
         }
     }
 }
